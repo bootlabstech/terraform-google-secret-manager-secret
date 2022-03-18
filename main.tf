@@ -1,6 +1,7 @@
 resource "google_secret_manager_secret" "secret" {
   secret_id = var.secret_id
   labels    = length(keys(var.labels)) < 0 ? null : var.labels
+  project = var.project
 
   dynamic "replication" {
     for_each = var.replication_automatic ? [1] : []
@@ -30,4 +31,5 @@ resource "google_secret_manager_secret" "secret" {
 resource "google_secret_manager_secret_version" "secret-version" {
   secret      = google_secret_manager_secret.secret.id
   secret_data = var.secret_data
+  project = var.project
 }
