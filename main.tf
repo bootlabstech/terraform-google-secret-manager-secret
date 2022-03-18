@@ -32,3 +32,11 @@ resource "google_secret_manager_secret_version" "secret-version" {
   secret      = google_secret_manager_secret.secret.id
   secret_data = var.secret_data
 }
+
+resource "google_project_service_identity" "hc_sa" {
+  count = !var.replication_automatic && length(var.replication_user_managed_replicas) != 0 ? 1 : 0
+  provider = google-beta
+
+  project = var.project
+  service = "secretmanager.googleapis.com"
+}
