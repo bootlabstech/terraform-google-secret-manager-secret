@@ -17,7 +17,9 @@ resource "google_secret_manager_secret" "secret" {
           for_each = var.replication_user_managed_replicas
           content {
             location                    = replicas.value.location
-            customer_managed_encryption = replicas.value.customer_managed_encryption
+            customer_managed_encryption {
+              kms_key_name = replicas.value.customer_managed_encryption
+            }
           }
         }
       }
