@@ -26,6 +26,10 @@ resource "google_secret_manager_secret" "secret" {
       }
     }
   }
+
+  depends_on = [
+    google_project_service_identity.si
+  ]
 }
 
 resource "google_secret_manager_secret_version" "secret-version" {
@@ -34,8 +38,8 @@ resource "google_secret_manager_secret_version" "secret-version" {
 }
 
 resource "google_project_service_identity" "si" {
-  provider = google-beta
   count = !var.replication_automatic && length(var.replication_user_managed_replicas) != 0 ? 1 : 0
+  provider = google-beta
   project = var.project
   service = "secretmanager.googleapis.com"
 }
