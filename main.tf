@@ -33,7 +33,7 @@ resource "google_secret_manager_secret_version" "secret-version" {
   secret_data = var.secret_data
 }
 
-resource "google_project_service_identity" "hc_sa" {
+resource "google_project_service_identity" "si" {
   provider = google-beta
   count = !var.replication_automatic && length(var.replication_user_managed_replicas) != 0 ? 1 : 0
   project = var.project
