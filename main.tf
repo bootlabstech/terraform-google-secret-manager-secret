@@ -3,7 +3,7 @@ resource "google_secret_manager_secret" "secret" {
   labels    = length(keys(var.labels)) < 0 ? null : var.labels
 
   dynamic "replication" {
-    for_each = var.replication_automatic != 0 ? [1] : []
+    for_each = var.replication_automatic ? [1] : []
     content {
       automatic = true
     }
