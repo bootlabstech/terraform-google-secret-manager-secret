@@ -34,3 +34,8 @@ variable "secret_data" {
   type        = string
   description = "The secret data. Must be no larger than 64KiB. Note: This property is sensitive and will not be displayed in the plan."
 }
+
+variable "secretAccessorMembers" {
+  type        = list(string)
+  description = "The list of members who will have secret accessor role."
+}
