@@ -38,4 +38,5 @@ variable "secret_data" {
 variable "secretAccessorMembers" {
   type        = list(string)
   description = "The list of members who will have secret accessor role."
+  default     = []
 }
