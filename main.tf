@@ -6,7 +6,7 @@ resource "google_secret_manager_secret" "secret" {
   dynamic "replication" {
     for_each = var.replication_automatic ? [1] : []
     content {
-      automatic = true
+      automatic = false
     }
   }
 
